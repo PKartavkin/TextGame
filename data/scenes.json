@@ -1,0 +1,88 @@
+{
+  "scenes": {
+    "scene1": {
+      "id": "scene1",
+      "text": "You wake up in a dark room. What do you do?",
+      "image": "img1.png",
+      "choices": [
+        { "text": "Look around", "nextScene": "scene2" },
+        { "text": "Call for help", "nextScene": "scene3" }
+      ]
+    },
+    "scene2": {
+      "id": "scene2",
+      "text": "You find a door. It's locked. What now?",
+      "choices": [
+        { "text": "Try to pick the lock", "nextScene": "scene4" },
+        { "text": "Search the room", "nextScene": "scene5" },
+        { "text": "Sit and wait", "nextScene": "scene6" }
+      ]
+    },
+    "scene3": {
+      "id": "scene3",
+      "text": "Your voice echoes. Nobody answers. What now?",
+      "choices": [
+        { "text": "Sit and wait", "nextScene": "scene6" },
+        { "text": "Search the room", "nextScene": "scene5" }
+      ]
+    },
+    "scene4": {
+      "id": "scene4",
+      "text": "You successfully pick the lock. The door opens to a hallway.",
+      "choices": [
+        { "text": "Go left", "nextScene": "scene7" },
+        { "text": "Go right", "nextScene": "scene8" }
+      ]
+    },
+    "scene5": {
+      "id": "scene5",
+      "text": "You find a key under a rug. What do you do?",
+      "choices": [
+        { "text": "Use the key on the door", "nextScene": "scene4" },
+        { "text": "Keep searching", "nextScene": "scene9" }
+      ]
+    },
+    "scene6": {
+      "id": "scene6",
+      "text": "You wait. Time passes, and you fall asleep. The end.",
+      "image": "img2.png",
+      "isEnd": true,
+      "choices": []
+    },
+    "scene7": {
+      "id": "scene7",
+      "text": "You find a staircase leading up.",
+      "choices": [
+        { "text": "Climb the stairs", "nextScene": "scene10" },
+        { "text": "Go back", "nextScene": "scene4" }
+      ]
+    },
+    "scene8": {
+      "id": "scene8",
+      "text": "You find a storage room full of supplies.",
+      "choices": [
+        { "text": "Take supplies", "nextScene": "scene10" },
+        { "text": "Go back", "nextScene": "scene4" }
+      ]
+    },
+    "scene9": {
+      "id": "scene9",
+      "text": "You find nothing else. What now?",
+      "choices": [
+        { "text": "Use the key on the door", "nextScene": "scene4" },
+        { "text": "Sit and wait", "nextScene": "scene6" }
+      ]
+    },
+    "scene10": {
+      "id": "scene10",
+      "text": "You escape the building. Congratulations!",
+      "image": "img3.png",
+      "isEnd": true,
+      "choices": []
+    }
+  },
+  "stats": {
+    "currentScene": "scene1",
+    "inventory": []
+  }
+}

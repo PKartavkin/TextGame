@@ -1,0 +1,29 @@
+{
+  "name": "text-game",
+  "main": "expo-router/entry",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "test": "jest --watchAll",
+    "lint": "expo lint"
+  },
+  "dependencies": {
+    "@react-navigation/stack": "^7.0.12",
+    "expo-router": "~4.0.11",
+    "expo-splash-screen": "~0.29.16",
+    "expo": "~52.0.11",
+    "react": "18.3.1",
+    "react-native": "0.76.3",
+    "react-native-webview": "13.12.2",
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "react-native-web": "~0.19.13"
+  },
+  "private": true,
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/react": "~18.3.12"
+  }
+}
