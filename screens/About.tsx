@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../navigation/AppNavigator";
+import MenuButton from "../components/MenuButton";
 
 type AboutProps = {
     navigation: StackNavigationProp<RootStackParamList, "About">;
@@ -15,7 +16,7 @@ const About: React.FC<AboutProps> = ({ navigation }) => {
                 Welcome to the Text Adventure Game! This game is designed to immerse you in a story where your choices matter.
                 Created by [Your Name/Team].
             </Text>
-            <Button title="Back to Menu" onPress={() => navigation.navigate("MainMenu")} />
+            <MenuButton title="Back to Menu" onPress={() => navigation.navigate("MainMenu")} />
         </View>
     );
 };

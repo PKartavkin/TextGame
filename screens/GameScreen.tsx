@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, FlatList } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import scenesData from "../data/scenes.json";
+import MenuButton from "../components/MenuButton";
 
 const STORAGE_KEY = "currentScene";
 
@@ -34,13 +35,13 @@ const GameScreen: React.FC = ({ navigation }: any) => {
         <View style={styles.container}>
             <Text style={styles.text}>{currentScene.text}</Text>
             {currentScene.isEnd ? (
-                <Button title="Go Back to Menu" onPress={handleBackToMenu} />
+                <MenuButton title="Go Back to Menu" onPress={handleBackToMenu} />
             ) : (
                 <FlatList
                     data={currentScene.choices}
                     keyExtractor={(item) => item.nextScene}
                     renderItem={({ item }) => (
-                        <Button title={item.text} onPress={() => handleChoice(item.nextScene)} />
+                        <MenuButton title={item.text} onPress={() => handleChoice(item.nextScene)} />
                     )}
                 />
             )}
