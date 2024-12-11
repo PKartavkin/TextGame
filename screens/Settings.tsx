@@ -4,11 +4,11 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../navigation/AppNavigator";
 import MenuButton from "../components/MenuButton";
 
-type AboutProps = {
+type SettingsProps = {
     navigation: StackNavigationProp<RootStackParamList, "Settings">;
 };
 
-const SettingsScreen: React.FC<AboutProps> = ({ navigation }) => {
+const SettingsScreen: React.FC<SettingsProps> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Settings</Text>
