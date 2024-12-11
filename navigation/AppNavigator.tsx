@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MainMenu from "../screens/MainMenu";
 import GameScreen from "../screens/GameScreen";
 import About from "../screens/About";
+import Settings from "../screens/Settings";
 
 export type RootStackParamList = {
     MainMenu: undefined;
@@ -21,6 +22,7 @@ const AppNavigator: React.FC = () => {
         >
             <Stack.Screen name="MainMenu" component={MainMenu} />
             <Stack.Screen name="GameScreen" component={GameScreen} />
+            <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="About" component={About} />
         </Stack.Navigator>
     );
