@@ -8,7 +8,7 @@ type AboutProps = {
     navigation: StackNavigationProp<RootStackParamList, "Settings">;
 };
 
-const About: React.FC<AboutProps> = ({ navigation }) => {
+const SettingsScreen: React.FC<AboutProps> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Settings</Text>
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default About;
+export default SettingsScreen;
