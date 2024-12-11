@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
-import {View, Text, StyleSheet, Button, Dimensions, Image} from "react-native";
+// src/screens/MainMenu.tsx
+import React, { useEffect, useState, useContext } from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../navigation/AppNavigator";
+import MenuButton from "../components/MenuButton"; // Import your custom button
+import styles from "../styles/styles"; // Ensure styles.menuButton is defined
 
 const STORAGE_KEY = "currentScene";
 
@@ -16,33 +19,55 @@ const MainMenu: React.FC<MainMenuProps> = ({ navigation }) => {
     useEffect(() => {
         // Check if a saved position exists
         const checkSavedScene = async () => {
-            const savedScene = await AsyncStorage.getItem(STORAGE_KEY);
-            setCanContinue(!!savedScene);
+            try {
+                const savedScene = await AsyncStorage.getItem(STORAGE_KEY);
+                setCanContinue(!!savedScene);
+            } catch (error) {
+                console.error("Failed to load saved scene:", error);
+            }
         };
         checkSavedScene();
     }, []);
 
     const handleStartNewGame = async () => {
-        await AsyncStorage.removeItem(STORAGE_KEY); // Clear saved progress
-        navigation.navigate("GameScreen"); // Navigate to the game
+        try {
+            await AsyncStorage.removeItem(STORAGE_KEY); // Clear saved progress
+            navigation.navigate("GameScreen"); // Navigate to the game
+        } catch (error) {
+            console.error("Failed to start new game:", error);
+        }
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Welcome to the Text Adventure Game</Text>
-            <Image source={require('../assets/images/img1.png')} resizeMode="contain"
-                   style={{width: 200}}
+        <View style={stylesLocal.container}>
+            <Text style={stylesLocal.title}>Welcome to the Text Adventure Game</Text>
+            <Image
+                source={require('../assets/images/img1.png')}
+                resizeMode="contain"
+                style={{ width: 200, height: 200 }}
             />
             {canContinue && (
-                <Button title="Continue" onPress={() => navigation.navigate("GameScreen")} />
+                <MenuButton
+                    title="Continue"
+                    onPress={() => navigation.navigate("GameScreen")}
+                    style={stylesLocal.button}
+                />
             )}
-            <Button title="Start New Game" onPress={handleStartNewGame} />
-            <Button title="About" onPress={() => navigation.navigate("About")} />
+            <MenuButton
+                title="Start New Game"
+                onPress={handleStartNewGame}
+                style={stylesLocal.button}
+            />
+            <MenuButton
+                title="About"
+                onPress={() => navigation.navigate("About")}
+                style={stylesLocal.button}
+            />
         </View>
     );
 };
 
-const styles = StyleSheet.create({
+const stylesLocal = StyleSheet.create({
     button: {
         marginBottom: 20,
         alignSelf: "center",
@@ -52,6 +77,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#121212",
+        padding: 20,
     },
     title: {
         color: "white",
