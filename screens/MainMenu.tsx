@@ -59,6 +59,11 @@ const MainMenu: React.FC<MainMenuProps> = ({ navigation }) => {
                 style={stylesLocal.button}
             />
             <MenuButton
+                title="Settings"
+                onPress={() => navigation.navigate("Settings")}
+                style={stylesLocal.button}
+            />
+            <MenuButton
                 title="About"
                 onPress={() => navigation.navigate("About")}
                 style={stylesLocal.button}
