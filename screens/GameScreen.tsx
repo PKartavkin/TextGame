@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, SafeAreaView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import scenesData from "../data/scenes.json";
 import MenuButton from "../components/MenuButton";
-import { Asset } from 'expo-asset';
 
 const STORAGE_KEY = "currentScene";
 
@@ -29,11 +28,11 @@ const GameScreen: React.FC = ({ navigation }: any) => {
 
     const currentScene = scenesData.scenes[currentSceneId];
 
-
     const handleChoice = async (nextSceneId: string) => {
         setCurrentSceneId(nextSceneId);
         await AsyncStorage.setItem(STORAGE_KEY, nextSceneId); // Save the scene
     };
+
     const handleBackToMenu = async () => {
         await AsyncStorage.removeItem(STORAGE_KEY); // Clear saved progress
         navigation.navigate("MainMenu"); // Navigate back to Main Menu
@@ -42,41 +41,100 @@ const GameScreen: React.FC = ({ navigation }: any) => {
     const sceneImage = currentScene.image ? images[currentScene.image] : null;
 
     return (
-        <View style={styles.container}>
-            {sceneImage && (
-                <Image
-                    source={sceneImage}
-                    style={{ width: 200, height: 200 }}
-                />
-            )}
-            <Text style={styles.text}>{currentScene.text}</Text>
-            {currentScene.isEnd ? (
-                <MenuButton title="Go Back to Menu" onPress={handleBackToMenu} />
-            ) : (
-                <FlatList
-                    data={currentScene.choices}
-                    keyExtractor={(item) => item.nextScene}
-                    renderItem={({ item }) => (
-                        <MenuButton title={item.text} onPress={() => handleChoice(item.nextScene)} />
-                    )}
-                />
-            )}
-        </View>
+        <SafeAreaView style={styles.container}>
+            {/* Top margin */}
+            <View style={styles.topMargin} />
+
+            {/* Image section */}
+            <View style={styles.imageSection}>
+                {sceneImage && (
+                    <Image
+                        source={sceneImage}
+                        style={styles.image}
+                        resizeMode="contain"
+                    />
+                )}
+            </View>
+
+            {/* Text section */}
+            <View style={styles.textSection}>
+                <Text style={styles.text}>{currentScene.text}</Text>
+            </View>
+
+            {/* Buttons section */}
+            <View style={styles.buttonSection}>
+                {currentScene.isEnd ? (
+                    <MenuButton
+                        title="Go Back to Menu"
+                        onPress={handleBackToMenu}
+                        style={styles.menuButton} // Pass additional styles if needed
+                    />
+                ) : (
+                    <FlatList
+                        data={currentScene.choices}
+                        keyExtractor={(item) => item.nextScene}
+                        renderItem={({ item }) => (
+                            <MenuButton
+                                title={item.text}
+                                onPress={() => handleChoice(item.nextScene)}
+                                style={styles.menuButton} // Pass additional styles if needed
+                            />
+                        )}
+                        contentContainerStyle={styles.buttonList}
+                        showsVerticalScrollIndicator={false}
+                    />
+                )}
+            </View>
+
+            {/* Bottom margin */}
+            <View style={styles.bottomMargin} />
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#121212",
+    },
+    topMargin: {
+        flex: 1, // 10% of the screen
+    },
+    imageSection: {
+        flex: 2.5, // 25% of the screen
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
-        padding: 20,
+    },
+    image: {
+        width: "80%",
+        height: "80%",
+    },
+    textSection: {
+        flex: 2.5, // 25% of the screen
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: 20,
     },
     text: {
         color: "white",
         fontSize: 18,
-        marginBottom: 20,
+        textAlign: "center",
+    },
+    buttonSection: {
+        flex: 3, // 30% of the screen
+        justifyContent: "center",
+        alignItems: "center", // Center buttons horizontally
+        width: "100%",
+    },
+    buttonList: {
+        alignItems: "center", // Center FlatList items horizontally
+        justifyContent: "center",
+    },
+    menuButton: {
+        marginVertical: 5, // Spacing between buttons
+    },
+    bottomMargin: {
+        flex: 1, // 10% of the screen
     },
 });
 
