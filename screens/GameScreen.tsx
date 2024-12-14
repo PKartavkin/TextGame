@@ -39,7 +39,6 @@ const GameScreen: React.FC = ({ navigation }: any) => {
         navigation.navigate("MainMenu"); // Navigate back to Main Menu
     };
 
-    console.log(currentScene.image);
     const sceneImage = currentScene.image ? images[currentScene.image] : null;
 
     return (
@@ -69,8 +68,10 @@ const GameScreen: React.FC = ({ navigation }: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        justifyContent: "center",
+        alignItems: "center",
         backgroundColor: "#121212",
+        padding: 20,
     },
     text: {
         color: "white",

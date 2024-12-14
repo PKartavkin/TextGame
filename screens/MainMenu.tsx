@@ -1,11 +1,9 @@
-// src/screens/MainMenu.tsx
 import React, { useEffect, useState, useContext } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../navigation/AppNavigator";
-import MenuButton from "../components/MenuButton"; // Import your custom button
-import styles from "../styles/styles"; // Ensure styles.menuButton is defined
+import MenuButton from "../components/MenuButton";
 
 const STORAGE_KEY = "currentScene";
 

@@ -1,4 +1,3 @@
-// src/hooks/useClickSound.ts
 import { useEffect, useRef } from 'react';
 import { Audio } from 'expo-av';
 
@@ -9,7 +8,7 @@ const useClickSound = () => {
         const loadSound = async () => {
             try {
                 const { sound } = await Audio.Sound.createAsync(
-                    require('../../assets/sounds/click.mp3')
+                    require('../assets/sounds/click.mp3')
                 );
                 soundRef.current = sound;
             } catch (error) {

@@ -4,7 +4,6 @@ interface Styles {
     menuButton: ViewStyle;
     menuButtonPressed: ViewStyle;
     menuButtonText: TextStyle;
-    // Add other styles as needed
 }
 
 const styles = StyleSheet.create<Styles>({
