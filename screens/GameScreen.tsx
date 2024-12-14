@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet, FlatList } from "react-native";
+import { View, Text, Button, StyleSheet, FlatList, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import scenesData from "../data/scenes.json";
 import MenuButton from "../components/MenuButton";
+import { Asset } from 'expo-asset';
 
 const STORAGE_KEY = "currentScene";
+
+// Mapping image names to their paths
+const images = {
+    'img1.png': require('../assets/images/img1.png'),
+    'img2.png': require('../assets/images/img2.png'),
+};
 
 const GameScreen: React.FC = ({ navigation }: any) => {
     const [currentSceneId, setCurrentSceneId] = useState(scenesData.stats.currentScene);
@@ -22,6 +29,7 @@ const GameScreen: React.FC = ({ navigation }: any) => {
 
     const currentScene = scenesData.scenes[currentSceneId];
 
+
     const handleChoice = async (nextSceneId: string) => {
         setCurrentSceneId(nextSceneId);
         await AsyncStorage.setItem(STORAGE_KEY, nextSceneId); // Save the scene
@@ -31,8 +39,17 @@ const GameScreen: React.FC = ({ navigation }: any) => {
         navigation.navigate("MainMenu"); // Navigate back to Main Menu
     };
 
+    console.log(currentScene.image);
+    const sceneImage = currentScene.image ? images[currentScene.image] : null;
+
     return (
         <View style={styles.container}>
+            {sceneImage && (
+                <Image
+                    source={sceneImage}
+                    style={{ width: 200, height: 200 }}
+                />
+            )}
             <Text style={styles.text}>{currentScene.text}</Text>
             {currentScene.isEnd ? (
                 <MenuButton title="Go Back to Menu" onPress={handleBackToMenu} />
